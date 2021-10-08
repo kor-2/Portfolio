@@ -6,7 +6,8 @@ require_once 'config/connect.php';
 
 $error=[];
 
-if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
+if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) 
+{
 
   
   if (strlen($_POST['pseudo']) <= 3 || strlen($_POST['pseudo']) >= 30 ) 
@@ -36,8 +37,6 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
       echo 'Base de donnée indisponible';
     }
   }
-  
-
 }
 
 
