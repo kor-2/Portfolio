@@ -10,11 +10,11 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token'])
 {
 
   
-  if (strlen($_POST['pseudo']) <= 3 || strlen($_POST['pseudo']) >= 30 ) 
+  if (strlen($_POST['pseudo']) < 3 || strlen($_POST['pseudo']) > 30 ) 
   {
     $error['pseudo'] = '<br>Pseudo trop petit ou trop grand (+ de 3 ou - de 30)';
   }
-  if(isset($_POST['email']) && empty($_POST['email']))
+  if(isset($_POST['email']) && !preg_match('#^[\w.-]+@[\w.-]+.[a-z]{2,6}$#i', $_POST['email']))
   {
     $error['email'] = '<br>E-mail invalide ou vide';
   }
@@ -26,13 +26,13 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token'])
   else {
     $error['passwordConf'] = '<br>Mot de passe invalide';
   }
-  if (empty($errors)) 
+  if (empty($error)) 
   {
-    $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+   
     $sql= "INSERT INTO users(email, password, pseudo, roles) VALUES ('".$_POST['email']."','".$password_hash."','".$_POST['pseudo']."','".json_encode(['ROLE_USER'])."')";
     if ($mysqli->query($sql) === true)
     {
-      redirectToRoute();
+      redirectToRoute('/login.php');
     } else {
       echo 'Base de donnée indisponible';
     }
