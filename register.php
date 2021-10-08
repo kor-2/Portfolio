@@ -4,29 +4,49 @@
 require_once 'config/framework.php';
 require_once 'config/connect.php';
 
-$error=null;
+$error=[];
+
+
+
 
 
 if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
-  if(isset($_POST['pseudo']) && !empty($_POST['pseudo'])){
-    echo "<br>Veuillez remplir le champ";
+
+  if(isset($_POST['pseudo'])){
+    if (strlen($_POST['pseudo']) <= 3 ) {
+      $error['pseudo'] = '<br>Pseudo trop petit (5)';
+    }
+    if (strlen($_POST['pseudo']) >= 30 ) {
+      $error['pseudo'] = '<br>Pseudo trop grand (30)';
+    }
+  
   }
-  if (strlen($_POST['pseudo']) < 4 ) {
-    echo '<br>Pseudo trop petit';
+  if(isset($_POST['email']) && empty($_POST['email'])){
+    $error['email'] = '<br>E-mail invalide ou vide';
   }
-  if (30< strlen($_POST['pseudo'])) {
-    echo '<br>Pseudo trop grand';
+  if(isset($_POST['password']) && empty($_POST['password']) && $_POST['password'] !== $_POST['passwordConf'] ){
+    
+    
+    $error['passwordConf'] = '<br>Mot de passe invalide';
   }
-  if(isset($_POST['email']) && !empty($_POST['email'])){
-      echo "<br>Veuillez remplir le champ";
+  if (empty($errors)) {
+    $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    dump($password_hash);
+    $sql= "INSERT INTO users(email, password, pseudo, roles) VALUES ('value-1','".$password_hash."','".$_POST['pseudo']."','".json_encode(['ROLE_USER'])."')";
+    if ($mysqli->query($sql) === true) {
+      redirectToRoute('/login.php');
+    } else {
+      echo 'Base de donnée introuvable ;(';
+    }
   }
-  if(isset($_POST['password']) && !empty($_POST['password'])){
-    echo'<br>Mot de passe incorrecte';
+  else {
+    echo 'pas bon :/';
   }
-  if($_POST['password'] === $_POST['passwordConf'] ){
-    echo'<br>Ce ne sont pas les même mots de passe';
-  }
+
 }
+
+
+
 
 
 
@@ -104,6 +124,12 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
           </div>
           
         </form>
+        <div class="d-flex justify-content-center m-4">
+            <a href="/" class="btn btn-primary  ">Page d'acceuil</a>
+          </div>
+          <div class="d-flex justify-content-center m-4">
+            <a href="login.php" class="btn btn-primary  ">Se connecter</a>
+          </div>
       </div>
     </div>
 
