@@ -3,32 +3,35 @@
 require_once 'config/framework.php';
 require_once 'config/connect.php';
 
+$errors = [];
 
-if (isset($_POST['submit'])) {
-  $email = $_POST['email'];
-  $pass = $_POST['password'];
+if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
 
-  $data = query("SELECT * FROM users WHERE email = $email AND 'password' = $pass");
-  
-  
-  if (empty($email) && empty($pass)) {
-
-    echo 'Espaces vide ';
+  if (isset($_POST['email']) && !preg_match('#^[\w.-]+@[\w.-]+.[a-z]{2,6}$#i', $_POST['email'])) {
+    $errors['email'] = 'Adresse email non valide';
   }
-  if ($email === $data['email'] && $pass === $data['password']) {
-    redirectToRoute('/compte.php');
-  }
-  else {
-    echo 'pabon';
+
+  if (empty($errors)) {
+    $sql = "SELECT * FROM users WHERE email = '".$_POST['email']."'";
+    if ($result = $mysqli->query($sql)) {
+      if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+              if (password_verify($_POST['password'], $row['password']) === true) {
+                $_SESSION['user'] = $row;
+                redirectToRoute('/compte.php');
+              } else {
+                $errors['compte'] = 'compte non reconnu';
+              }
+          }
+      } else {
+        $errors['email'] = 'Adresse email non valide';
+      }
+      $result->close();
+    }
   }
 }
 
-
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -54,6 +57,7 @@ if (isset($_POST['submit'])) {
           Se connecter
         </p>
 
+        <?= isset($errors['compte']) ? $errors['compte'] : ''; ?>
         <form class="mx-1 mx-md-4" method="post" >
           <input type="hidden"name="token" value="<?= miniToken(); ?>">
           
@@ -63,6 +67,7 @@ if (isset($_POST['submit'])) {
             <div class="form-outline flex-fill mb-0">
               <input type="email"  class="form-control" name="email" id="email"/>
               <label class="form-label" for="email">E-mail</label>
+              <?= isset($errors['email']) ? $errors['email'] : ''; ?>
             </div>
           </div>
 
