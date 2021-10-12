@@ -5,18 +5,18 @@ require_once 'config/connect.php';
 
 
 if (isset($_POST['submit'])) {
-  $mailconnect = $_POST['email'];
-  $passconnect = $_POST['password'];
+  $email = $_POST['email'];
+  $pass = $_POST['password'];
 
-  $dtmail = ("SELECT * FROM users WHERE email = $mailconnect");
-  $dtpass = ("SELECT * FROM users WHERE 'password' = $passconnect");
+  $data = query("SELECT * FROM users WHERE email = $email AND 'password' = $pass");
   
-  if (!empty($mailconnect) && !empty($passconnect)) {
+  
+  if (empty($email) && empty($pass)) {
 
     echo 'Espaces vide ';
   }
-  if ($mailconnect === $dtmail && $passconnect === $dtmail) {
-    redirectToRoute('compte.php');
+  if ($email === $data['email'] && $pass === $data['password']) {
+    redirectToRoute('/compte.php');
   }
   else {
     echo 'pabon';
