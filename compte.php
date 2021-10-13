@@ -106,8 +106,8 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
 
 
 
-<div class="m-a">
-    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 m-auto">
+<div class="m-a mt-5">
+    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 m-auto pt-4">
         <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
             Compte de <?= $_SESSION['user']['pseudo'];?>
         </p>
@@ -121,6 +121,7 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
             <div class="d-flex flex-row align-items-center mb-3">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
+                    <p>Votre pseudo est <?= $_SESSION['user']['pseudo'];?> .</p>
                     <input type="pseudo" class="form-control" name="pseudo" id="pseudo" />
                     <label class="form-label" for="pseudo">Pseudo</label>
                     <p><?= isset($errors['pseudo']) ? $errors['pseudo'] : ''; ?></p>
@@ -128,7 +129,7 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
 
                 </div>
             </div>
-            <div class="d-flex justify-content-center m-4">
+            <div class="d-flex justify-content-center ">
                 <button type="submit" id="btnpseudo" class="btn btn-primary ">Changer de pseudo</button>
             </div>
 
@@ -144,9 +145,10 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
             <input type="hidden" name="token_email" value="<?= miniToken('token_email'); ?>">
 
 
-            <div class="d-flex flex-row align-items-center mb-3">
+            <div class="d-flex flex-row align-items-center ">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                 <div class="form-outline flex-fill mb-0">
+                    <p>Votre email est <?= $_SESSION['user']['email'];?>.</p>
                     <input type="email" class="form-control" name="email" id="email" />
                     <label class="form-label" for="email">Email</label>
                     <p><?= isset($errors['email']) ? $errors['email'] : ''; ?></p>
@@ -170,7 +172,7 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
 
             <div class="d-flex flex-row align-items-center mb-3">
                 <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                <div class="form-outline flex-fill mb-0">
+                <div class="form-outline flex-fill ">
                     <input type="password" class="form-control" name="password" id="password" />
                     <label class="form-label" for="password">Mot de passe</label>
                     <input type="password" class="form-control" name="passwordConf" id="passwordConf" />
@@ -191,7 +193,7 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
 
             <input type="hidden" name="token_delete" value="<?= miniToken('token_delete'); ?>">
             <div class="d-flex justify-content-center m-4">
-                <button type="submit" id="submit" name="submit" class="btn btn-danger ">Supprimer le
+                <button type="submit" id="submit" name="submit" class="btn btn-danger " onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ?')">Supprimer le
                     compte</button>
             </div>
 

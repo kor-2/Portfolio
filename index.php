@@ -5,19 +5,32 @@ require_once 'config/connect.php';
 require_once 'asset/default_template/header.php';
 
 ?>
+<header class="bg-header py-5">
+        
+      
+
+    <div class="text-center text-light">
+        <img src="asset/img/#" alt="photo corentin heckmann" class="img-responsive" />
+        <h1 class="font-weight-bold">HECKMANN CORENTIN</h1>
+
+        <div class="white-line m-auto"></div>
+        <p>Devloppeur Web</p>
+    </div>
+</header>
 
 
 
 
 <main class="mt-5">
-    <div class="text-center mb-5">
-        <h2 class="font-weight-bold text-dark-blue">PORTFOLIO</h2>
+    
+    <div class="text-center mb-5" id="portfolio">
+        <h2 class="font-weight-bold text-dark-blue " >PORTFOLIO</h2>
         <div class="dark-blue-line m-auto"></div>
     </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 card-w">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 ">
         <div class="col">
-            <div class="card card-w">
+            <div class="card ">
                 <img src="..." class="card-img-top" alt="..." />
                 <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -30,7 +43,7 @@ require_once 'asset/default_template/header.php';
             </div>
         </div>
         <div class="col">
-            <div class="card card-w">
+            <div class="card ">
                 <img src="..." class="card-img-top" alt="..." />
                 <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -43,7 +56,7 @@ require_once 'asset/default_template/header.php';
             </div>
         </div>
         <div class="col">
-            <div class="card card-w">
+            <div class="card ">
                 <img src="..." class="card-img-top" alt="..." />
                 <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -56,7 +69,7 @@ require_once 'asset/default_template/header.php';
             </div>
         </div>
         <div class="col">
-            <div class="card card-w">
+            <div class="card ">
                 <img src="..." class="card-img-top" alt="..." />
                 <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -69,7 +82,7 @@ require_once 'asset/default_template/header.php';
             </div>
         </div>
         <div class="col">
-            <div class="card card-w">
+            <div class="card ">
                 <img src="..." class="card-img-top" alt="..." />
                 <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -82,7 +95,7 @@ require_once 'asset/default_template/header.php';
             </div>
         </div>
         <div class="col">
-            <div class="card card-w">
+            <div class="card ">
                 <img src="..." class="card-img-top" alt="..." />
                 <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -96,8 +109,8 @@ require_once 'asset/default_template/header.php';
         </div>
     </div>
 
-    <div class="text-center bg-header py-5 px-2 text-light">
-        <h2 class="font-weight-bold">INFO</h2>
+    <div class="text-center bg-header py-5 px-2 text-light" id="info">
+        <h2 class="font-weight-bold" >INFO</h2>
             <div class="white-line m-auto"></div>
                 <p class="mt-3">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
