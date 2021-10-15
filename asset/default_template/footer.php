@@ -1,14 +1,14 @@
     <footer class="bg-nav">
-      <div class="row row-cols-1 row-cols-sm-2 py-5 text-center">
-          <div class="col text-light">
-            <h3 class="font-weight-bold">COORDONNEES</h3>
+      <div class="row row-cols-1 row-cols-sm-2  p-0 pt-5 text-center  m-0">
+          <div class="col text-light p-0 m-0">
+            <h3 class="font-weight-bold ">COORDONNEES</h3>
             <p>
               E-mail: checkmann.corentin@gmail.com</br>
               Tel: 06.37.03.27.27
             </p>
 
           </div>
-          <div class="col text-light">
+          <div class="col text-light p-0 m-0">
             <h3 class="font-weight-bold">RESEAUX SOCIAUX</h3>
             <ul class="list-unstyled">
               <li><a href="#">Linkedin</a></li>
@@ -17,7 +17,7 @@
 
           </div>
       </div>
-      <div class="copyright py-4 text-center text-white">
+      <div class="copyright pt-4 text-center text-white">
           <div class="container">
             <small>Copyright &copy; Portfolio Heckmann Corentin 2021</small>
           </div>

@@ -28,72 +28,7 @@ require_once 'asset/default_template/header.php';
         <div class="dark-blue-line m-auto"></div>
     </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 ">
-        <div class="col">
-            <div class="card ">
-                <img src="..." class="card-img-top" alt="..." />
-                <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card ">
-                <img src="..." class="card-img-top" alt="..." />
-                <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card ">
-                <img src="..." class="card-img-top" alt="..." />
-                <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card ">
-                <img src="..." class="card-img-top" alt="..." />
-                <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card ">
-                <img src="..." class="card-img-top" alt="..." />
-                <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up
-                            the bulk of the card's content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3  m-3">
         <div class="col">
             <div class="card ">
                 <img src="..." class="card-img-top" alt="..." />
@@ -123,8 +58,50 @@ require_once 'asset/default_template/header.php';
                 </p>
 
                 <button type="button" class="btn btn-outline-light" href="asset/pdf/#">Mon CV PDF</button>
-            </div>
+            
     </div>
+
+
+    <div class="row justify-content-center m-0">
+       
+        <div class="col-lg-8 col-xl-7 mx-3">
+
+            <h2 class="font-weight-bold text-center mt-4" id="contact" >CONTACT</h2>
+            <div class="dark-blue-line m-auto"></div>
+            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+             
+                <div class="form-floating mt-5">
+                    <input class="form-control" id="name" type="text" placeholder="Entrer votre nom ...."  />
+                    <label for="name">Nom complet</label>
+                    
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="email"  type="email" placeholder="adresse@example.com" />
+                    <label for="email">Adresse email</label>
+                    
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="sujet" type="text" placeholder="Votre sujet..."/>
+                    <label for="sujet">Sujet</label>
+                    
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="message" type="text" placeholder="Votre message ..." style="height: 10rem"></textarea>
+                    <label for="message">Message</label><br>
+
+                <div class="text-center">
+                    <button class="btn btn-primary btn-xl "id="submitButton" type="submit">Envoyer</button>
+                </div>
+                              
+                
+            </form>
+          </div>
+    </div>
+
+
 </main>
 
 <?php  require_once 'asset/default_template/footer.php'; ?>
