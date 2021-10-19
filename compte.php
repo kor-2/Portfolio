@@ -114,7 +114,7 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
 
 
 
-        <form class="m-4" method="post" >
+        <form class="m-4" method="post">
             <input type="hidden" name="token_pseudo" value="<?= miniToken('token_pseudo'); ?>">
 
 
@@ -193,7 +193,8 @@ if (isset($_POST['token_delete']) && $_POST['token_delete'] === $_SESSION['token
 
             <input type="hidden" name="token_delete" value="<?= miniToken('token_delete'); ?>">
             <div class="d-flex justify-content-center m-4">
-                <button type="submit" id="submit" name="submit" class="btn btn-danger " onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ?')">Supprimer le
+                <button type="submit" id="submit" name="submit" class="btn btn-danger "
+                    onclick="return confirm('Etes vous sur de vouloir supprimer votre compte ?')">Supprimer le
                     compte</button>
             </div>
 

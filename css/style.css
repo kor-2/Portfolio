@@ -37,3 +37,21 @@ body {
   color: #ffffff;
   border-color: #ffffff;
 }
+
+
+
+.btn-projets {
+  color: #fff !important;
+  background-color: #1abc9c !important;
+  border-color: #1abc9c !important;
+}
+
+.btn-projets:hover {
+  color: #fff !important;
+  background-color: #12876f !important;
+  border-color: #12876f !important;
+}
+
+.modal {
+  left: 34% !important;
+}
