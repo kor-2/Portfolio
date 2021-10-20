@@ -64,7 +64,7 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
             </div>
 
             <div class="d-flex justify-content-center m-4">
-                <button type="submit" id="submit" name="submit" class="btn btn-projets ">S'inscrire</button>
+                <button type="submit" id="submit" name="submit" class="btn btn-projets ">Se connecter</button>
             </div>
 
         </form>

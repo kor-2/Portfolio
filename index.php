@@ -4,6 +4,18 @@ require_once 'config/framework.php';
 require_once 'config/connect.php';
 require_once 'asset/default_template/header.php';
 
+$sqlprojet = "SELECT * FROM projets WHERE statut = 1 ORDER BY creation  DESC LIMIT 6  ";
+$result = $mysqli->query($sqlprojet);
+$projets = $result->fetch_All();
+
+
+
+/*
+if (isset($_POST['token_commentaire']) && $_POST['token_commentaire'] === $_SESSION['token_commentaire']) {
+
+    $sqlenvoi = "INSERT INTO commentaires(commentaire) VALUE ('".$_POST['message']."')";
+}
+*/
 
 
 ?>
@@ -31,60 +43,97 @@ require_once 'asset/default_template/header.php';
     </div>
 
 
-
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3   m-3">
 
         <?php
 
-        $errors = [];
+            foreach ($projets as $projet):
 
-        
-        //$sql = "SELECT * FROM projets ORDER BY creation DESC LIMIT 6  ";
-        $sql = "SELECT projets.id, projets.titre, projets.content, projets.image, projets.slug, projets.auteur, commentaires.user, commentaires.projet, commentaires.comment, users.pseudo
-        FROM projets
-        INNER JOIN commentaires ON commentaires.projet = projet.id
-        INNER JOIN users ON users.id = projets.auteur AND users.id = commentaires.user DESC LIMIT 6
-        ";
-        $result = $mysqli->query($sql);
-        
+                $sqluser = "SELECT * FROM users WHERE id ='". $projet[7]."'";
+                $result = $mysqli->query($sqluser);
+                $users = $result->fetch_All();
 
-        foreach ($projets as $projet):
+                foreach ($users as $user): 
+
+                    
+    
+                     
+                    
+                
         
         ?>
-        <!--
+
         <div class="col ">
             <div class="card ">
-                <img src="<?php //echo $projet[3];?>" class="card-img-top" alt="<?php //echo $projet[5];?>" />
+                <img src="<?php echo $projet[3];?>" class="card-img-top" alt="<?php echo $projet[5];?>" />
                 <div class="card-body">
-                    <h5 class="card-title"><?php //echo $projet[1];?></h5>
-                    <p class="card-text"><?php //echo $projet[2];?></p>
+                    <h5 class="card-title"><?php echo $projet[1];?></h5>
+                    <p class="card-text"><?php echo $projet[2], '<br>Auteur: ',$user[3];?></p>
                     <a href="https://github.com/kor-2" class="btn btn-projets">Github</a>
                     <button type="button" class="btn btn-projets" data-toggle="modal"
-                        data-target="#staticBackdrop-<?php //echo $projet[0];?>">Commentaires</button>
+                        data-target="#staticBackdrop-<?php echo $projet[0];?>">Commentaires</button>
 
                 </div>
             </div>
         </div>
 
-         Modal 
+        <!--Modal-->
+
+        <?php
+
+        $sqlcom = "SELECT * FROM commentaires WHERE projet ='". $projet[0]."'";
+        $result = $mysqli->query($sqlcom);
+        $comments = $result->fetch_All();
+
+        
 
 
 
-        <div class="modal fade" id="staticBackdrop-<?php //echo $projet[0];?>" data-backdrop="static"
+        ?>
+        <div class="modal fade" id="staticBackdrop-<?php echo $projet[0];?>" data-backdrop="static"
             data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable ">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Commentaires</h5>
+
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <?php foreach ($comments as $comment):?>
+                        <p><?php echo $comment[3] ;?></p>
+                        <?php     
 
+                            $sqluser2 = "SELECT * FROM users WHERE id ='". $comment[1]."'";
+                            $result = $mysqli->query($sqluser2);
+                            $users2 = $result->fetch_All();
 
-                        <form method="post">
+                            foreach ($users2 as $user2) {
+                                
+                                if ($comment[1] === $user2[0]) {
+                                    echo '<p>Auteur: ', $user2[3], '</p>
+                                        <div class="ligne-com "></div>                                   
+                                    '; 
+                                }else{
+                                    echo '; (';
+                                }
+                            }
+                        
+                        
+                        
+                            
+                        
+                        
+                        ?>
 
+                        <?php  endforeach;?>
+
+                        <?php if (isset($_SESSION['user'])) { ?>
+                        <form method="post"><br>
+
+                            <input type="hidden" name="token" value="<?= miniToken('token_commentaire'); ?>">
                             <label for="message">Votre commentaire</label><br>
                             <textarea class="form-control" type="text" id="message"></textarea><br>
                             <button type="button" class="btn btn-projets">Envoyer</button>
@@ -92,12 +141,20 @@ require_once 'asset/default_template/header.php';
 
 
                         </form>
+
+                        <?php
+                            } else {
+                                echo '<a href="/login.php">Veulliez vous identifier pour ajouter un commentaire</a>';
+                            }
+                        ?>
+
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
 
 
+        <?php endforeach;?>
         <?php endforeach;?>
     </div>
 
