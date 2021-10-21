@@ -35,7 +35,7 @@ if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
 ?>
 
 
-<div class="m-5">
+<div class="m-5 pb-5">
     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 m-auto pt-4">
         <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
             Se connecter
