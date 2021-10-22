@@ -1,5 +1,5 @@
 <?php
-//require_once 'compte.php';
+
 require_once 'config/framework.php';
 require_once 'config/connect.php';
 require_once 'asset/default_template/header.php';
@@ -7,29 +7,28 @@ require_once 'asset/default_template/header.php';
 $errors = [];
 
 if (isset($_POST['token']) && $_POST['token'] === $_SESSION['token']) {
-
-  if (isset($_POST['email']) && !preg_match('#^[\w.-]+@[\w.-]+.[a-z]{2,6}$#i', $_POST['email'])) {
-    $errors['email'] = 'Adresse email non valide';
-  }
-
-  if (empty($errors)) {
-    $sql = "SELECT * FROM users WHERE email = '".$_POST['email']."'";
-    if ($result = $mysqli->query($sql)) {
-      if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-              if (password_verify($_POST['password'], $row['password']) === true) {
-                $_SESSION['user'] = $row;
-                redirectToRoute('/compte.php');
-              } else {
-                $errors['compte'] = 'compte non reconnu';
-              }
-          }
-      } else {
+    if (isset($_POST['email']) && !preg_match('#^[\w.-]+@[\w.-]+.[a-z]{2,6}$#i', $_POST['email'])) {
         $errors['email'] = 'Adresse email non valide';
-      }
-      $result->close();
     }
-  }
+
+    if (empty($errors)) {
+        $sql = "SELECT * FROM users WHERE email = '".$_POST['email']."'";
+        if ($result = $mysqli->query($sql)) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    if (password_verify($_POST['password'], $row['password']) === true) {
+                        $_SESSION['user'] = $row;
+                        redirectToRoute('/compte.php');
+                    } else {
+                        $errors['compte'] = 'compte non reconnu';
+                    }
+                }
+            } else {
+                $errors['email'] = 'Adresse email non valide';
+            }
+            $result->close();
+        }
+    }
 }
 
 ?>
