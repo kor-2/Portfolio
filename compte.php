@@ -10,13 +10,11 @@ if (!isset($_SESSION['user'])) {
 
 $errors = [];
 
-dump($_SESSION['user']);
-
 if (isset($_POST['token_pseudo']) && $_POST['token_pseudo'] === $_SESSION['token_pseudo']) {
     if (strlen($_POST['pseudo']) < 3 || strlen($_POST['pseudo']) > 30) {
         $errors['pseudo'] = '<br>Pseudo trop petit ou trop grand (+ de 3 ou - de 30)';
     } else {
-        $sql = "UPDATE users SET pseudo = '".$_POST['pseudo']."' WHERE id = '".$_SESSION['user']['user_id']."'";
+        $sql = "UPDATE users SET pseudo = '".$_POST['pseudo']."' WHERE user_id = '".$_SESSION['user']['user_id']."'";
         if ($mysqli->query($sql) === true) {
             redirectToRoute('/deconnexion.php');
         } else {
